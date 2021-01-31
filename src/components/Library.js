@@ -10,10 +10,11 @@ const Library = ({
   songInfo,
   setSongInfo,
   isPlaying,
-  setIsPlaying
+  setIsPlaying,
+  libraryOpen,
 }) => {
   return (
-    <div className="library">
+    <div className={`library ${!libraryOpen ? "hiden" : ""} `}>
       <h2>Library</h2>
       <div className="library-songs">
         {songs.map((song) => (
