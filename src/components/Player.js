@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -6,10 +6,14 @@ import {
   faAngleRight,
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
-const Player = ({ curentSong, isPlaying, setIsPlaying }) => {
-  //ref
-  const audioRef = useRef(null);
-
+const Player = ({
+  curentSong,
+  isPlaying,
+  setIsPlaying,
+  audioRef,
+  songInfo,
+  setSongInfo,
+}) => {
   //event  handlers
   const clickPlayHandler = () => {
     if (isPlaying === false) {
@@ -30,16 +34,12 @@ const Player = ({ curentSong, isPlaying, setIsPlaying }) => {
       Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
     );
   };
-  const dragHandler=(e)=>{
-    audioRef.current.currentTime=e.target.value;
-    setSongInfo({...songInfo,currentTime :e.target.value});
-
-  }
+  const dragHandler = (e) => {
+    audioRef.current.currentTime = e.target.value;
+    setSongInfo({ ...songInfo, currentTime: e.target.value });
+  };
   //state
-  const [songInfo, setSongInfo] = useState({
-    currentTime: 0,
-    duration: 0,
-  });
+
   //return
   return (
     <div className="player-container">
@@ -60,7 +60,7 @@ const Player = ({ curentSong, isPlaying, setIsPlaying }) => {
           onClick={clickPlayHandler}
           className="play"
           size="2x"
-          icon={!isPlaying ? faPlay: faPause}
+          icon={!isPlaying ? faPlay : faPause}
         />
         <FontAwesomeIcon
           className="skip-forword"
